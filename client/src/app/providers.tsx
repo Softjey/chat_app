@@ -8,7 +8,9 @@ export default function Providers({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <SessionProvider>
-      <NextUIProvider>{children}</NextUIProvider>
+      <NextUIProvider>
+        <>{children}</>
+      </NextUIProvider>
     </SessionProvider>
   );
 }
