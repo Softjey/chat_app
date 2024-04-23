@@ -1,13 +1,9 @@
 import { auth } from "@/configs/auth";
-import NonAuthorizedHomePage from "./_home-pages/NonAuthorizedHomePage";
-import AuthorizedHomePage from "./_home-pages/AuthorizedHomePage";
+import AuthorizedHomePage from "./_pages/AuthorizedHomePage copy";
+import PublicHomePage from "./_pages/PublicHomePage";
 
 export default async function Home() {
   const session = await auth();
 
-  if (!session) {
-    return <NonAuthorizedHomePage />;
-  }
-
-  return <AuthorizedHomePage />;
+  return session ? <AuthorizedHomePage /> : <PublicHomePage />;
 }
