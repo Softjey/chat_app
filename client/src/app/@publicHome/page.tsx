@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function PublicHomePage() {
   return (
-    <div className="flex flex-col gap-20 items-center select-none">
-      <h1 className="text-center text-9xl ">PulseChat</h1>
+    <main className="grow flex flex-col gap-20 items-center justify-center">
+      <h1 className="text-center text-9xl select-none">PulseChat</h1>
 
       <form action={signIn}>
         <Button
@@ -20,6 +20,6 @@ export default function PublicHomePage() {
           Sign in with Google
         </Button>
       </form>
-    </div>
+    </main>
   );
 }

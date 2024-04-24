@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pretty-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pretty-scrollbar::-webkit-scrollbar-track {
+  background-color: hsl(var(--nextui-background) / var(--nextui-background-opacity, 1));
+}
+
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--nextui-default) / var(--nextui-default-opacity, 0.5));
+}
+
+.pretty-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--nextui-default) / 1);
+}
+
+.bottom-shadow {
+  box-shadow: 0 5px 20px -15px hsl(var(--nextui-foreground) / var(--nextui-foreground-opacity, 0.4));
+}
+
+.top-shadow {
+  box-shadow: 0 -5px 20px -15px hsl(var(--nextui-foreground) / var(--nextui-foreground-opacity, 0.4));
+}

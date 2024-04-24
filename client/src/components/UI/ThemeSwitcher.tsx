@@ -5,9 +5,9 @@ import moonIcon from "../../../public/icons/moon-icon.svg";
 import { Switch } from "@nextui-org/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
-export default function ThemeSwitcher() {
+function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -35,3 +35,5 @@ export default function ThemeSwitcher() {
     />
   );
 }
+
+export default memo(ThemeSwitcher);

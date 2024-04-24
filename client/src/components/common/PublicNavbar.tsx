@@ -1,7 +1,7 @@
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import { NavbarItem } from "@nextui-org/react";
-import Logo from "./UI/Logo";
-import ThemeSwitcher from "./UI/ThemeSwitcher";
+import Logo from "../UI/Logo";
+import ThemeSwitcher from "../UI/ThemeSwitcher";
 
 export default function PublicNavbar() {
   return (
