@@ -1,7 +1,7 @@
-import { RequestAuth } from 'src/auth/interfaces/request-auth.interface';
+import { RequestUser } from 'src/modules/auth/interfaces/request-user.interface';
 
 declare module 'express' {
   export interface Request {
-    auth?: RequestAuth;
+    user?: RequestUser;
   }
 }

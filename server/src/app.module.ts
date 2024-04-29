@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './modules/users/user.entity';
 
 @Module({
   imports: [
@@ -14,9 +15,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const url = configService.get('DATABASE_URL');
-        const type = url.split(':')[0];
 
-        return { type, url };
+        return {
+          url,
+          type: url.split(':')[0],
+          synchronize: true,
+          entities: [User],
+        };
       },
     }),
   ],

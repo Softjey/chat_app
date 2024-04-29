@@ -10,6 +10,6 @@ export class AppController {
   @UseGuards(AuthGuard)
   @Post()
   getHello(@Req() request: Request): string {
-    return this.appService.getHello(request.auth?.email || 'World ');
+    return this.appService.getHello(request.user?.email || 'World ');
   }
 }
