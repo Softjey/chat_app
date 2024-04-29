@@ -15,6 +15,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "strict": true,
+    "strictPropertyInitialization": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
