@@ -9,7 +9,9 @@ export class AppController {
 
   @UseGuards(AuthGuard)
   @Post()
-  getHello(@Req() request: Request): string {
-    return this.appService.getHello(request.user?.email || 'World ');
+  getHello(@Req() request: Request) {
+    const message = this.appService.getHello(request.user?.email || 'World ');
+
+    return { message };
   }
 }

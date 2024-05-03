@@ -1,30 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './modules/users/user.entity';
+import { ConfigModule } from './modules/config/config.module';
+import { DataBaseModule } from './modules/database/database.module';
 
 @Module({
-  imports: [
-    AuthModule,
-    ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        const url = configService.get('DATABASE_URL');
-
-        return {
-          url,
-          type: url.split(':')[0],
-          synchronize: true,
-          entities: [User],
-        };
-      },
-    }),
-  ],
+  imports: [ConfigModule, DataBaseModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
