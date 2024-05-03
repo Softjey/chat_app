@@ -1,6 +1,6 @@
 "use client";
 
-import { getHello } from "@/api/test";
+import apiClient from "@/api/apiClient";
 import Chat from "@/components/common/Chat/Chat";
 import ChatList from "@/components/common/ChatList";
 import { Button } from "@nextui-org/react";
@@ -14,11 +14,7 @@ export default function AuthorizedHomePage() {
     <main className={`grow flex ${mainHeight}`}>
       <ChatList className="w-80" />
 
-      {session.data && (
-        <Button onClick={() => getHello(session.data.accessToken)}>
-          Get Hello!
-        </Button>
-      )}
+      {session.data && <Button onClick={() => apiClient.getHello()}>Get Hello!</Button>}
 
       <Chat className={`grow ${mainHeight}`} />
     </main>

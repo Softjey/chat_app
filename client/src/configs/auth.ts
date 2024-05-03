@@ -9,20 +9,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
-  },
-  callbacks: {
-    async jwt({ token, account, trigger }) {
-      if (trigger === "signIn" && account) {
-        return { ...token, accessToken: account.access_token };
-      }
-
-      return token;
-    },
-    session: async ({ session, token: { accessToken } }) => {
-      return { ...session, accessToken };
-    },
-  },
 });
+
+export const authConfig = {
+  accessTokenExpires: "1h",
+};
