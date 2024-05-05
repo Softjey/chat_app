@@ -43,6 +43,7 @@ type GroupUser {
 }
 
 enum UserGroupRole {
+  OWNER
   ADMIN
   MEMBER
 }
@@ -67,5 +68,16 @@ enum UserRole {
 }
 
 type Query {
-  getHello: Group!
+  hello: String!
+}
+
+type Mutation {
+  createGroup(createGroupDto: CreateGroupDto!): Group!
+}
+
+input CreateGroupDto {
+  name: String!
+  description: String
+  photo: String
+  privacyType: GroupPrivacyType
 }
