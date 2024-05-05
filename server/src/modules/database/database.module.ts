@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { User } from '../users/user.entity';
 import { ConfigModule } from '../config/config.module';
 import { ConfigService } from '../config/config.service';
+import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [
@@ -23,4 +23,4 @@ import { ConfigService } from '../config/config.service';
     }),
   ],
 })
-export class DataBaseModule {}
+export class DatabaseModule {}
