@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Group {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  description: String
+  photo: String
+  privacyType: GroupPrivacyType!
+  groupUsers: [GroupUser!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum GroupPrivacyType {
+  PRIVATE
+  PUBLIC
+}
+
+type GroupUser {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userRole: UserGroupRole!
+  group: Group!
+  user: User!
+}
+
+enum UserGroupRole {
+  ADMIN
+  MEMBER
+}
+
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  description: String
+  photo: String
+  role: UserRole!
+  email: String!
+  userGroups: [GroupUser!]!
+  lastActivity: DateTime
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+type Query {
+  getHello: Group!
+}
