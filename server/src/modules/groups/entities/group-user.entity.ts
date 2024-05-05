@@ -5,6 +5,7 @@ import { Group } from './group.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 
 export enum UserGroupRole {
+  OWNER = 'owner',
   ADMIN = 'admin',
   MEMBER = 'member',
 }
@@ -25,10 +26,10 @@ export class GroupUser extends StableEntity {
   @Field(() => Group)
   @ManyToOne(() => Group, (group) => group.groupUsers)
   @JoinColumn({ name: 'groupId' })
-  group: Group;
+  group?: Group;
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.userGroups)
   @JoinColumn({ name: 'userId' })
-  user: User;
+  user?: User;
 }

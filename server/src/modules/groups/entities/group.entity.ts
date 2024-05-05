@@ -1,5 +1,5 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { ProfileEntity } from 'src/base-entities/profile.entity';
+import { ProfileEntity } from 'src/base-entities/profile/profile.entity';
 import { Entity, OneToMany } from 'typeorm';
 import { Column } from 'typeorm';
 import { GroupUser } from './group-user.entity';
@@ -21,9 +21,9 @@ export class Group extends ProfileEntity {
 
   @Field(() => [GroupUser])
   @OneToMany(() => GroupUser, (groupUser) => groupUser.group)
-  groupUsers: GroupUser;
+  groupUsers?: GroupUser;
 
   @Field(() => [Message])
   @OneToMany(() => Message, (message) => message.group)
-  messages: Message[];
+  messages?: Message[];
 }
