@@ -3,14 +3,21 @@ import { ExecutionContext } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import type { Response, Request } from 'express';
 import { CookieName } from '../constants/cookie';
+import { ContextHelper } from 'src/utils/context.helper';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest<Request>();
-    const response = context.switchToHttp().getResponse<Response>();
+    const request = ContextHelper.handleContext<Request>(context, {
+      http: (ctx) => ctx.getRequest(),
+      graphql: (ctx) => ctx.req,
+    });
+    const response = ContextHelper.handleContext<Response>(context, {
+      http: (ctx) => ctx.getResponse(),
+      graphql: (ctx) => ctx.res,
+    });
     const { headers, cookies } = request;
     const bearerToken = headers.authorization?.split(' ')[1];
     const cookieToken = cookies[CookieName.ACCESS_TOKEN];
