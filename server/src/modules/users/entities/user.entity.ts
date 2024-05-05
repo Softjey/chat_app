@@ -1,17 +1,20 @@
-import { IsEmail, Length } from 'class-validator';
-import { Column, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
-import { Entity, Index, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Field, GraphQLISODateTime, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { IsEmail } from 'class-validator';
+import { ProfileEntity } from 'src/base-entities/profile.entity';
+import { GroupUser } from 'src/modules/groups/entities/group-user.entity';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
 
 export enum UserRole {
   ADMIN = 'admin',
   USER = 'user',
 }
 
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+registerEnumType(UserRole, { name: 'UserRole' });
 
+@ObjectType()
+@Entity()
+export class User extends ProfileEntity {
+  @Field(() => UserRole)
   @Column({
     type: 'enum',
     enum: UserRole,
@@ -19,31 +22,17 @@ export class User {
   })
   role: UserRole;
 
-  @Length(2, 100)
-  @Column({ length: 100 })
-  name: string;
-
-  @Length(1, 250)
-  @Column({ nullable: true, length: 250 })
-  description?: string;
-
-  @Column({ nullable: true })
-  photo?: string;
-
+  @Field(() => String)
   @IsEmail()
   @Column({ unique: true })
   @Index({ unique: true })
   email: string;
 
-  @Column({ nullable: true })
-  lastActivity?: Date;
+  @Field(() => [GroupUser])
+  @OneToMany(() => GroupUser, (groupUser) => groupUser.user)
+  userGroups: GroupUser[];
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  @DeleteDateColumn()
-  deletedAt?: Date;
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  @Column({ type: 'datetime', nullable: true })
+  lastActivity: Date | null;
 }
