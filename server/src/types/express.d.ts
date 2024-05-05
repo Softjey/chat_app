@@ -1,7 +1,7 @@
-import { RequestUser } from 'src/modules/auth/interfaces/request-user.interface';
+import { User } from 'src/modules/users/entities/user.entity';
 
 declare module 'express' {
   export interface Request {
-    user?: RequestUser;
+    user?: User;
   }
 }

@@ -25,10 +25,10 @@ export class User {
 
   @Length(1, 250)
   @Column({ nullable: true, length: 250 })
-  description: string;
+  description?: string;
 
   @Column({ nullable: true })
-  photo: string;
+  photo?: string;
 
   @IsEmail()
   @Column({ unique: true })
@@ -36,7 +36,7 @@ export class User {
   email: string;
 
   @Column({ nullable: true })
-  lastActivity: Date;
+  lastActivity?: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -45,5 +45,5 @@ export class User {
   updatedAt: Date;
 
   @DeleteDateColumn()
-  deletedAt: Date;
+  deletedAt?: Date;
 }
