@@ -5,12 +5,7 @@ import { ConfigService } from './config.service';
 
 @Global()
 @Module({
-  imports: [
-    NestConfigModule.forRoot({
-      isGlobal: true,
-      load: [configuration],
-    }),
-  ],
+  imports: [NestConfigModule.forRoot({ load: [configuration] })],
   providers: [ConfigService],
   exports: [ConfigService],
 })
