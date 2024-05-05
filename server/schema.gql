@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  content: String!
+  user: User!
+  group: Group!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Group {
   id: ID!
   createdAt: DateTime!
@@ -11,12 +25,8 @@ type Group {
   photo: String
   privacyType: GroupPrivacyType!
   groupUsers: [GroupUser!]!
+  messages: [Message!]!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 enum GroupPrivacyType {
   PRIVATE
@@ -47,6 +57,7 @@ type User {
   role: UserRole!
   email: String!
   userGroups: [GroupUser!]!
+  messages: [Message!]!
   lastActivity: DateTime
 }
 
