@@ -1,8 +1,16 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Message } from './entities/message.entity';
+import { Repository } from 'typeorm';
+import { GroupUser } from '../group-user/entities/group-user.entity';
 
-@Module({
-  imports: [TypeOrmModule.forFeature([Message])],
-})
-export class MessagesModule {}
+@Injectable()
+export class MessagesService {
+  constructor(@InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
+
+  findByGroupUserId(groupUserId: GroupUser['id']): Promise<Message[]> {
+    return this.messageRepository.find({
+      where: { groupUser: { id: groupUserId } },
+    });
+  }
+}
