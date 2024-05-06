@@ -2,52 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Message {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  content: String!
-  user: User!
-  group: Group!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Group {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String!
-  description: String
-  photo: String
-  privacyType: GroupPrivacyType!
-  groupUsers: [GroupUser!]!
-  messages: [Message!]!
-}
-
-enum GroupPrivacyType {
-  PRIVATE
-  PUBLIC
-}
-
-type GroupUser {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  userRole: UserGroupRole!
-  group: Group!
-  user: User!
-}
-
-enum UserGroupRole {
-  OWNER
-  ADMIN
-  MEMBER
-}
-
 type User {
   id: ID!
   createdAt: DateTime!
@@ -58,13 +12,57 @@ type User {
   role: UserRole!
   email: String!
   userGroups: [GroupUser!]!
-  messages: [Message!]!
   lastActivity: DateTime
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 enum UserRole {
   ADMIN
   USER
+}
+
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  content: String!
+  groupUser: Group!
+}
+
+type GroupUser {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userRole: UserGroupRole!
+  group: Group!
+  user: User!
+  messages: [Message!]!
+}
+
+enum UserGroupRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+type Group {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  description: String
+  photo: String
+  privacyType: GroupPrivacyType!
+  groupUsers: [GroupUser!]!
+}
+
+enum GroupPrivacyType {
+  PRIVATE
+  PUBLIC
 }
 
 type Query {
