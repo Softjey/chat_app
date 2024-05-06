@@ -1,8 +1,7 @@
 import { Field, GraphQLISODateTime, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
 import { ProfileEntity } from 'src/base-entities/profile/profile.entity';
-import { GroupUser } from 'src/modules/groups/entities/group-user.entity';
-import { Message } from 'src/modules/messages/entities/message.entity';
+import { GroupUser } from 'src/modules/group-user/entities/group-user.entity';
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 
 export enum UserRole {
@@ -32,10 +31,6 @@ export class User extends ProfileEntity {
   @Field(() => [GroupUser])
   @OneToMany(() => GroupUser, (groupUser) => groupUser.user)
   userGroups?: GroupUser[];
-
-  @Field(() => [Message])
-  @OneToMany(() => Message, (message) => message.user)
-  messages?: Message[];
 
   @Field(() => GraphQLISODateTime, { nullable: true })
   @Column({ type: 'datetime', nullable: true })
