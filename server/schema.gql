@@ -66,6 +66,7 @@ enum GroupPrivacyType {
 }
 
 type Query {
+  getMyGroups: [GroupUser!]!
   hello: String!
 }
 
