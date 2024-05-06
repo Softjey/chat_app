@@ -27,7 +27,7 @@ export class GroupUserService {
   }
 
   async getByUserId(userId: User['id']) {
-    return this.groupUserRepository.findOne({
+    return this.groupUserRepository.find({
       where: { user: { id: userId } },
     });
   }
