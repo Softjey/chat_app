@@ -5,6 +5,7 @@ import { Group } from '../groups/entities/group.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Message } from '../messages/entities/message.entity';
 import { User } from '../users/entities/user.entity';
+import { PaginationArgsI, PaginationHelper } from 'src/utils/pagination.helper';
 
 @Injectable()
 export class GroupUserService {
@@ -12,12 +13,11 @@ export class GroupUserService {
     @InjectRepository(GroupUser) private readonly groupUserRepository: Repository<GroupUser>,
   ) {}
 
-  async getByGroupId(groupId: Group['id']): Promise<GroupUser[]> {
-    const groupUsers = await this.groupUserRepository.find({
+  async getByGroupId(groupId: Group['id'], options: PaginationArgsI): Promise<GroupUser[]> {
+    return this.groupUserRepository.find({
       where: { group: { id: groupId } },
+      ...PaginationHelper.getPagination(options),
     });
-
-    return groupUsers;
   }
 
   async getByMessageId(messageId: Message['id']) {
@@ -26,9 +26,10 @@ export class GroupUserService {
     });
   }
 
-  async getByUserId(userId: User['id']) {
+  async getByUserId(userId: User['id'], options: PaginationArgsI) {
     return this.groupUserRepository.find({
       where: { user: { id: userId } },
+      ...PaginationHelper.getPagination(options),
     });
   }
 }

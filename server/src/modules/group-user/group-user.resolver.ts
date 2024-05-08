@@ -1,4 +1,4 @@
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GroupUser } from './entities/group-user.entity';
 import { UsersService } from 'src/modules/users/users.service';
 import { User } from '../users/entities/user.entity';
@@ -10,6 +10,7 @@ import { GroupUserService } from './group-user.service';
 import { ReqUser } from '../auth/decorators/req-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/gurads/auth.guard';
+import { MessagesPaginationArgs, MyGroupsPaginationArgs } from 'src/utils/pagination.helper';
 
 @UseGuards(AuthGuard)
 @Resolver(() => GroupUser)
@@ -22,8 +23,11 @@ export class GroupUserResolver {
   ) {}
 
   @Query(() => [GroupUser])
-  getMyGroups(@ReqUser() user: User): Promise<GroupUser[]> {
-    return this.groupUserService.getByUserId(user.id);
+  getMyGroups(
+    @ReqUser() user: User,
+    @Args() paginationOptions: MyGroupsPaginationArgs,
+  ): Promise<GroupUser[]> {
+    return this.groupUserService.getByUserId(user.id, paginationOptions);
   }
 
   @ResolveField()
@@ -37,7 +41,10 @@ export class GroupUserResolver {
   }
 
   @ResolveField()
-  async messages(@Parent() groupUser: GroupUser): Promise<Message[]> {
-    return this.messagesService.findByGroupUserId(groupUser.id);
+  async messages(
+    @Parent() groupUser: GroupUser,
+    @Args() paginationOptions: MessagesPaginationArgs,
+  ): Promise<Message[]> {
+    return this.messagesService.findByGroupUserId(groupUser.id, paginationOptions);
   }
 }

@@ -4,7 +4,13 @@ import { GroupsService } from './groups.service';
 import { CreateGroupDto } from './dtos/create-group.dto';
 import { GroupUser } from '../group-user/entities/group-user.entity';
 import { GroupUserService } from '../group-user/group-user.service';
+import { GroupUsersPaginationArgs } from 'src/utils/pagination.helper';
+import { UseGuards } from '@nestjs/common';
+import { ReqUser } from '../auth/decorators/req-user.decorator';
+import { AuthGuard } from '../auth/gurads/auth.guard';
+import { User } from '../users/entities/user.entity';
 
+@UseGuards(AuthGuard)
 @Resolver(() => Group)
 export class GroupsResolver {
   constructor(
@@ -17,17 +23,19 @@ export class GroupsResolver {
     return 'Hello World!';
   }
 
-  // @UseGuards(AuthGuard)
   @Mutation(() => Group)
   createGroup(
-    // @ReqUser() user: User,
+    @ReqUser() user: User,
     @Args('createGroupDto') createGroupDto: CreateGroupDto,
   ): Promise<Group> {
-    return this.groupsService.createGroup(createGroupDto, 'a8362cbb-5339-4757-9e81-7953dda1c7c9');
+    return this.groupsService.createGroup(createGroupDto, user.id);
   }
 
   @ResolveField()
-  groupUsers(@Parent() group: Group): Promise<GroupUser[]> {
-    return this.groupUserService.getByGroupId(group.id);
+  groupUsers(
+    @Parent() group: Group,
+    @Args() paginationOptions: GroupUsersPaginationArgs,
+  ): Promise<GroupUser[]> {
+    return this.groupUserService.getByGroupId(group.id, paginationOptions);
   }
 }

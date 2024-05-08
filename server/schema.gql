@@ -11,7 +11,7 @@ type User {
   photo: String
   role: UserRole!
   email: String!
-  userGroups: [GroupUser!]!
+  userGroups(offset: Int! = 1, limit: Int! = 50): [GroupUser!]!
   lastActivity: DateTime
 }
 
@@ -30,7 +30,7 @@ type Message {
   createdAt: DateTime!
   updatedAt: DateTime!
   content: String!
-  groupUser: Group!
+  groupUser: GroupUser!
 }
 
 type GroupUser {
@@ -40,7 +40,7 @@ type GroupUser {
   userRole: UserGroupRole!
   group: Group!
   user: User!
-  messages: [Message!]!
+  messages(offset: Int! = 1, limit: Int! = 100): [Message!]!
 }
 
 enum UserGroupRole {
@@ -57,7 +57,7 @@ type Group {
   description: String
   photo: String
   privacyType: GroupPrivacyType!
-  groupUsers: [GroupUser!]!
+  groupUsers(offset: Int! = 1, limit: Int! = 50): [GroupUser!]!
 }
 
 enum GroupPrivacyType {
@@ -66,7 +66,7 @@ enum GroupPrivacyType {
 }
 
 type Query {
-  getMyGroups: [GroupUser!]!
+  getMyGroups(offset: Int, limit: Int): [GroupUser!]!
   hello: String!
 }
 
