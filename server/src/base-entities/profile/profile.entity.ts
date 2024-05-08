@@ -13,6 +13,6 @@ export abstract class ProfileEntity extends StableEntity {
   description: string | null;
 
   @Field(() => String, { nullable: true })
-  @Column({ nullable: true })
-  photo?: string;
+  @Column({ type: 'text', nullable: true })
+  photo: string | null;
 }
