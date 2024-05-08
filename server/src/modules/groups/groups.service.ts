@@ -10,7 +10,10 @@ import { CreateGroupDto } from './dtos/create-group.dto';
 export class GroupsService {
   constructor(@InjectRepository(Group) private readonly groupRepository: Repository<Group>) {}
 
-  async createGroup(createGroupDto: CreateGroupDto, userId: User['id']): Promise<Group> {
+  async createOneWithInitialOwner(
+    createGroupDto: CreateGroupDto,
+    userId: User['id'],
+  ): Promise<Group> {
     return this.groupRepository.manager.transaction(async (manager) => {
       const group = await manager.save(Group, createGroupDto);
 

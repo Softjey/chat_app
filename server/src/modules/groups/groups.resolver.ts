@@ -28,7 +28,7 @@ export class GroupsResolver {
     @ReqUser() user: User,
     @Args('createGroupDto') createGroupDto: CreateGroupDto,
   ): Promise<Group> {
-    return this.groupsService.createGroup(createGroupDto, user.id);
+    return this.groupsService.createOneWithInitialOwner(createGroupDto, user.id);
   }
 
   @ResolveField()
