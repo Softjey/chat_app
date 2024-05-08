@@ -12,6 +12,6 @@ export class MessageResolver {
 
   @ResolveField()
   async groupUser(@Parent() message: Message) {
-    return this.groupUserService.getByMessageId(message.id);
+    return this.groupUserService.getOneByMessageId(message.id);
   }
 }

@@ -20,13 +20,13 @@ export class GroupUserService {
     });
   }
 
-  async getByMessageId(messageId: Message['id']) {
+  async getOneByMessageId(messageId: Message['id']): Promise<GroupUser | null> {
     return this.groupUserRepository.findOne({
       where: { messages: { id: messageId } },
     });
   }
 
-  async getByUserId(userId: User['id'], options: PaginationArgsI) {
+  async getByUserId(userId: User['id'], options: PaginationArgsI): Promise<GroupUser[]> {
     return this.groupUserRepository.find({
       where: { user: { id: userId } },
       ...PaginationHelper.getPagination(options),

@@ -32,12 +32,12 @@ export class GroupUserResolver {
 
   @ResolveField()
   async user(@Parent() groupUser: GroupUser): Promise<User | null> {
-    return this.usersService.findByGroupUserId(groupUser.id);
+    return this.usersService.getOneByGroupUserId(groupUser.id);
   }
 
   @ResolveField()
   async group(@Parent() groupUser: GroupUser): Promise<Group | null> {
-    return this.groupsService.findByGroupUserId(groupUser.id);
+    return this.groupsService.getByGroupUserId(groupUser.id);
   }
 
   @ResolveField()
@@ -45,6 +45,6 @@ export class GroupUserResolver {
     @Parent() groupUser: GroupUser,
     @Args() paginationOptions: MessagesPaginationArgs,
   ): Promise<Message[]> {
-    return this.messagesService.findByGroupUserId(groupUser.id, paginationOptions);
+    return this.messagesService.getByGroupUserId(groupUser.id, paginationOptions);
   }
 }

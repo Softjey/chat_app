@@ -24,7 +24,7 @@ export class GroupsService {
     });
   }
 
-  async findByGroupUserId(groupUserId: GroupUser['id']): Promise<Group | null> {
+  async getByGroupUserId(groupUserId: GroupUser['id']): Promise<Group | null> {
     return this.groupRepository.findOne({
       where: { groupUsers: { id: groupUserId } },
     });

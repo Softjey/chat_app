@@ -14,7 +14,7 @@ export class UsersService {
 
   // can be optimized
   async upsertOne(createUserDto: CreateUserI): Promise<User> {
-    const user = await this.findByEmail(createUserDto.email);
+    const user = await this.getOneByEmail(createUserDto.email);
 
     if (user) {
       return this.usersRepository.save({
@@ -26,13 +26,13 @@ export class UsersService {
     return this.usersRepository.save(createUserDto);
   }
 
-  async findByGroupUserId(groupUserId: GroupUser['id']) {
+  async getOneByGroupUserId(groupUserId: GroupUser['id']): Promise<User | null> {
     return this.usersRepository.findOne({
       where: { userGroups: { id: groupUserId } },
     });
   }
 
-  async findByEmail(email: string) {
+  async getOneByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findOne({ where: { email } });
   }
 }

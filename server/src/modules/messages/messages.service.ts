@@ -9,7 +9,7 @@ import { PaginationArgsI, PaginationHelper } from 'src/utils/pagination.helper';
 export class MessagesService {
   constructor(@InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
 
-  findByGroupUserId(groupUserId: GroupUser['id'], options: PaginationArgsI): Promise<Message[]> {
+  getByGroupUserId(groupUserId: GroupUser['id'], options: PaginationArgsI): Promise<Message[]> {
     const pagination = PaginationHelper.getPagination(options);
 
     return this.messageRepository.find({
