@@ -26,7 +26,7 @@ export class GroupsResolver {
   @Mutation(() => Group)
   createGroup(
     @ReqUser() user: User,
-    @Args('createGroupDto') createGroupDto: CreateGroupDto,
+    @Args('createGroupInput') createGroupDto: CreateGroupDto,
   ): Promise<Group> {
     return this.groupsService.createOneWithInitialOwner(createGroupDto, user.id);
   }
