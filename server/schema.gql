@@ -11,7 +11,7 @@ type User {
   photo: String
   role: UserRole!
   email: String!
-  userGroups(offset: Int! = 1, limit: Int! = 50): [GroupUser!]!
+  userGroups(offset: Int! = 0, limit: Int! = 50): [GroupUser!]!
   lastActivity: DateTime
 }
 
@@ -40,7 +40,7 @@ type GroupUser {
   userRole: UserGroupRole!
   group: Group!
   user: User!
-  messages(offset: Int! = 1, limit: Int! = 100): [Message!]!
+  messages(offset: Int! = 0, limit: Int! = 100): [Message!]!
 }
 
 enum UserGroupRole {
@@ -57,7 +57,7 @@ type Group {
   description: String
   photo: String
   privacyType: GroupPrivacyType!
-  groupUsers(offset: Int! = 1, limit: Int! = 50): [GroupUser!]!
+  groupUsers(offset: Int! = 0, limit: Int! = 50): [GroupUser!]!
 }
 
 enum GroupPrivacyType {
@@ -71,7 +71,8 @@ type Query {
 }
 
 type Mutation {
-  createGroup(createGroupDto: CreateGroupDto!): Group!
+  createGroup(createGroupInput: CreateGroupDto!): Group!
+  createMessage(createMessageInput: CreateMessageDto!): Message!
 }
 
 input CreateGroupDto {
@@ -79,4 +80,9 @@ input CreateGroupDto {
   description: String
   photo: String
   privacyType: GroupPrivacyType
+}
+
+input CreateMessageDto {
+  content: String!
+  groupId: ID!
 }
