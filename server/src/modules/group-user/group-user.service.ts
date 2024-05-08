@@ -32,4 +32,13 @@ export class GroupUserService {
       ...PaginationHelper.getPagination(options),
     });
   }
+
+  async getOneByGroupAndUserIds(
+    groupId: Group['id'],
+    userId: User['id'],
+  ): Promise<GroupUser | null> {
+    return this.groupUserRepository.findOne({
+      where: { group: { id: groupId }, user: { id: userId } },
+    });
+  }
 }
