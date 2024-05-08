@@ -22,6 +22,7 @@ export class MessagesService {
 
     return this.messageRepository.find({
       where: { groupUser: { id: groupUserId } },
+      order: { createdAt: 'DESC' },
       ...pagination,
     });
   }
