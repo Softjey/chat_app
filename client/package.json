@@ -9,10 +9,12 @@
     "lint": "next lint --fix"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.3",
     "@nextui-org/react": "^2.3.5",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.1.7",
+    "graphql": "^16.8.1",
     "jsonwebtoken": "^9.0.2",
     "next": "14.2.2",
     "next-auth": "^5.0.0-beta.16",

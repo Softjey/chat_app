@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import { getAccessToken } from "@/app/api/auth/_actions";
+import { gql } from "@apollo/client";
 
 interface ApiAxiosRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
@@ -10,11 +11,8 @@ const API_BASE_URL = "http://localhost:4000";
 export class ApiClient {
   private axiosInstance: AxiosInstance;
 
-  constructor(baseUrl: string) {
-    this.axiosInstance = axios.create({
-      baseURL: baseUrl,
-      withCredentials: true,
-    });
+  constructor(baseURL: string) {
+    this.axiosInstance = axios.create({ baseURL, withCredentials: true });
 
     this.axiosInstance.interceptors.response.use((response) => response, this.handleUnauthorized());
   }
@@ -48,6 +46,14 @@ export class ApiClient {
     console.log("hello", data.message);
 
     return data.message;
+  }
+
+  getGqlHello() {
+    return gql(`
+    	query getHello {
+        hello
+      }
+    `);
   }
 }
 
