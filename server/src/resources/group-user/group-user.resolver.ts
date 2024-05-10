@@ -5,12 +5,11 @@ import { User } from '../user/entities/user.entity';
 import { GroupService } from '../group/group.service';
 import { Group } from '../group/entities/group.entity';
 import { MessageService } from '../message/message.service';
-import { Message } from '../message/entities/message.entity';
 import { GroupUserService } from './group-user.service';
 import { ReqUser } from '../../modules/auth/decorators/req-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../../modules/auth/gurads/auth.guard';
-import { MessagesPaginationArgs, MyGroupsPaginationArgs } from 'src/utils/pagination.helper';
+import { MyGroupsPaginationArgs } from 'src/utils/pagination.helper';
 
 @UseGuards(AuthGuard)
 @Resolver(() => GroupUser)
@@ -38,13 +37,5 @@ export class GroupUserResolver {
   @ResolveField()
   async group(@Parent() groupUser: GroupUser): Promise<Group | null> {
     return this.groupsService.getByGroupUserId(groupUser.id);
-  }
-
-  @ResolveField()
-  async messages(
-    @Parent() groupUser: GroupUser,
-    @Args() paginationOptions: MessagesPaginationArgs,
-  ): Promise<Message[]> {
-    return this.messagesService.getByGroupUserId(groupUser.id, paginationOptions);
   }
 }

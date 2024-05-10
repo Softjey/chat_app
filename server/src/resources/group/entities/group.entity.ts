@@ -3,6 +3,7 @@ import { ProfileEntity } from 'src/base-entities/profile/profile.entity';
 import { Entity, OneToMany } from 'typeorm';
 import { Column } from 'typeorm';
 import { GroupUser } from '../../group-user/entities/group-user.entity';
+import { Message } from 'src/resources/message/entities/message.entity';
 
 export enum GroupPrivacyType {
   PRIVATE = 'private',
@@ -21,4 +22,8 @@ export class Group extends ProfileEntity {
   @Field(() => [GroupUser])
   @OneToMany(() => GroupUser, (groupUser) => groupUser.group)
   groupUsers?: GroupUser;
+
+  @Field(() => [Message])
+  @OneToMany(() => Message, (message) => message.group)
+  messages: Message[];
 }

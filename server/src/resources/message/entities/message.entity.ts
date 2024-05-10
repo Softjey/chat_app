@@ -1,7 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { StableEntity } from 'src/base-entities/stable.entity';
-import { GroupUser } from 'src/resources/group-user/entities/group-user.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Group } from 'src/resources/group/entities/group.entity';
+import { User } from 'src/resources/user/entities/user.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -10,8 +11,11 @@ export class Message extends StableEntity {
   @Column()
   content: string;
 
-  @Field(() => GroupUser)
-  @ManyToOne(() => GroupUser, (groupUser) => groupUser.messages)
-  @JoinColumn({ name: 'groupUserId' })
-  groupUser?: GroupUser;
+  @Field(() => Group)
+  @ManyToOne(() => Group, (group) => group.messages)
+  group?: Group;
+
+  @Field(() => User)
+  @ManyToOne(() => User, (user) => user.messages)
+  user?: User;
 }

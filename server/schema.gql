@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  content: String!
+  group: Group!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: ID!
   createdAt: DateTime!
@@ -12,25 +26,13 @@ type User {
   role: UserRole!
   email: String!
   userGroups(offset: Int! = 0, limit: Int! = 50): [GroupUser!]!
+  messages: [Message!]!
   lastActivity: DateTime
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 enum UserRole {
   ADMIN
   USER
-}
-
-type Message {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  content: String!
-  groupUser: GroupUser!
 }
 
 type GroupUser {
@@ -40,7 +42,6 @@ type GroupUser {
   userRole: UserGroupRole!
   group: Group!
   user: User!
-  messages(offset: Int! = 0, limit: Int! = 100): [Message!]!
 }
 
 enum UserGroupRole {
@@ -58,6 +59,7 @@ type Group {
   photo: String
   privacyType: GroupPrivacyType!
   groupUsers(offset: Int! = 0, limit: Int! = 50): [GroupUser!]!
+  messages: [Message!]!
 }
 
 enum GroupPrivacyType {
