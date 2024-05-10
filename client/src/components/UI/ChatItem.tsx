@@ -1,39 +1,31 @@
+import { GetMyGroupsQuery } from "@/api/graphql/generated/graphql";
 import { formatDateToLastVisit } from "@/utils/formatDateToLastVisit";
 import { Avatar, Chip } from "@nextui-org/react";
-
-interface ChatItemI {
-  id: number;
-  name: string;
-  avatar: string;
-  lastMessage: string;
-  lastMessageTime: string;
-}
+import { trim } from "../../utils/trim";
 
 interface Props {
-  chat: ChatItemI;
-  unreadMessages: number;
+  chat: GetMyGroupsQuery["myGroups"][number];
+  unreadMessages?: number;
 }
 
-export default function ChatItem({ chat, unreadMessages }: Props) {
-  const trimmedLastMessage =
-    chat.lastMessage.length > 30
-      ? `${chat.lastMessage.slice(0, 30)}...`
-      : chat.lastMessage;
+export default function ChatItem({ chat: { group, messages }, unreadMessages = 0 }: Props) {
+  const lastMessage = messages.length > 0 ? messages[0] : null;
+  const trimmedLastMessage = lastMessage ? trim(lastMessage.content, 30) : "Group created";
 
   return (
     <article className="flex justify-between h-16">
       <div className="flex gap-3 items-center">
-        <Avatar alt={chat.name} src={chat.avatar} size="lg" />
+        <Avatar alt={`${group.name} avatar`} src={group.photo ?? ""} size="lg" />
 
         <div className="flex flex-col">
-          <span className="text-medium">{chat.name}</span>
+          <span className="text-medium">{group.name}</span>
           <span className="text-sm text-default-400">{trimmedLastMessage}</span>
         </div>
       </div>
 
       <div className="flex flex-col gap-3 items-end">
         <span className="text-xs text-default-400">
-          {formatDateToLastVisit(chat.lastMessageTime)}
+          {formatDateToLastVisit(lastMessage?.createdAt ?? group.createdAt)}
         </span>
 
         {unreadMessages > 0 && (
