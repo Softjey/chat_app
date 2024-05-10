@@ -68,6 +68,7 @@ enum GroupPrivacyType {
 type Query {
   getMyGroups(offset: Int, limit: Int): [GroupUser!]!
   hello: String!
+  group(id: ID!): Group!
 }
 
 type Mutation {
