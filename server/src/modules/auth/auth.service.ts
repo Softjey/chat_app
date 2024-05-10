@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import * as jwt from 'jsonwebtoken';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from '../user/user.service';
+import { UserService } from '../../resources/user/user.service';
 import { plainToInstance } from 'class-transformer';
 import { ValidationError, validateOrReject } from 'class-validator';
 import { SessionDTO } from './dtos/session-dto';

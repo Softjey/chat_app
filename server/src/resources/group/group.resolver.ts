@@ -6,8 +6,8 @@ import { GroupUser } from '../group-user/entities/group-user.entity';
 import { GroupUserService } from '../group-user/group-user.service';
 import { GroupUsersPaginationArgs } from 'src/utils/pagination.helper';
 import { NotFoundException, UseGuards } from '@nestjs/common';
-import { ReqUser } from '../auth/decorators/req-user.decorator';
-import { AuthGuard } from '../auth/gurads/auth.guard';
+import { ReqUser } from '../../modules/auth/decorators/req-user.decorator';
+import { AuthGuard } from '../../modules/auth/gurads/auth.guard';
 import { User } from '../user/entities/user.entity';
 
 @UseGuards(AuthGuard)

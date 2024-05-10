@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { StableEntity } from 'src/base-entities/stable.entity';
-import { GroupUser } from 'src/modules/group-user/entities/group-user.entity';
+import { GroupUser } from 'src/resources/group-user/entities/group-user.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity()

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserI } from './interfaces/create-user.interface';
-import { GroupUser } from 'src/modules/group-user/entities/group-user.entity';
+import { GroupUser } from 'src/resources/group-user/entities/group-user.entity';
 
 @Injectable()
 export class UserService {

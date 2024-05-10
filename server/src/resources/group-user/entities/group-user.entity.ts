@@ -2,8 +2,8 @@ import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { StableEntity } from 'src/base-entities/stable.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Group } from '../../group/entities/group.entity';
-import { User } from 'src/modules/user/entities/user.entity';
-import { Message } from 'src/modules/message/entities/message.entity';
+import { User } from 'src/resources/user/entities/user.entity';
+import { Message } from 'src/resources/message/entities/message.entity';
 
 export enum UserGroupRole {
   OWNER = 'owner',

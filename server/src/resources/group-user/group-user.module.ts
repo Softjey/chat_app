@@ -2,7 +2,7 @@ import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GroupUser } from './entities/group-user.entity';
 import { GroupUserResolver } from './group-user.resolver';
-import { UserModule } from 'src/modules/user/user.module';
+import { UserModule } from 'src/resources/user/user.module';
 import { GroupUserService } from './group-user.service';
 import { GroupModule } from '../group/group.module';
 import { MessageModule } from '../message/message.module';

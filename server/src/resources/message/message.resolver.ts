@@ -3,10 +3,10 @@ import { Message } from './entities/message.entity';
 import { MessageService } from './message.service';
 import { GroupUserService } from '../group-user/group-user.service';
 import { CreateMessageDto } from './dtos/create-message.dto';
-import { ReqUser } from '../auth/decorators/req-user.decorator';
+import { ReqUser } from '../../modules/auth/decorators/req-user.decorator';
 import { User } from '../user/entities/user.entity';
 import { BadRequestException, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../auth/gurads/auth.guard';
+import { AuthGuard } from '../../modules/auth/gurads/auth.guard';
 
 @UseGuards(AuthGuard)
 @Resolver(() => Message)

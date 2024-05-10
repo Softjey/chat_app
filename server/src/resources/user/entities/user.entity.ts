@@ -1,7 +1,7 @@
 import { Field, GraphQLISODateTime, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
 import { ProfileEntity } from 'src/base-entities/profile/profile.entity';
-import { GroupUser } from 'src/modules/group-user/entities/group-user.entity';
+import { GroupUser } from 'src/resources/group-user/entities/group-user.entity';
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 
 export enum UserRole {

@@ -1,6 +1,6 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
 import { Message } from '../entities/message.entity';
-import { Group } from 'src/modules/group/entities/group.entity';
+import { Group } from 'src/resources/group/entities/group.entity';
 import { IsUUID, Length } from 'class-validator';
 
 @InputType()
