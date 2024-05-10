@@ -1,6 +1,6 @@
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Group } from './entities/group.entity';
-import { GroupsService } from './groups.service';
+import { GroupService } from './group.service';
 import { CreateGroupDto } from './dtos/create-group.dto';
 import { GroupUser } from '../group-user/entities/group-user.entity';
 import { GroupUserService } from '../group-user/group-user.service';
@@ -8,14 +8,14 @@ import { GroupUsersPaginationArgs } from 'src/utils/pagination.helper';
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { ReqUser } from '../auth/decorators/req-user.decorator';
 import { AuthGuard } from '../auth/gurads/auth.guard';
-import { User } from '../users/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 
 @UseGuards(AuthGuard)
 @Resolver(() => Group)
-export class GroupsResolver {
+export class GroupResolver {
   constructor(
     private readonly groupUserService: GroupUserService,
-    private readonly groupsService: GroupsService,
+    private readonly groupsService: GroupService,
   ) {}
 
   @Query(() => String)

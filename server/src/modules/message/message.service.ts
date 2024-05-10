@@ -7,7 +7,7 @@ import { PaginationArgsI, PaginationHelper } from 'src/utils/pagination.helper';
 import { CreateMessageI } from './interfaces/create-message.interface';
 
 @Injectable()
-export class MessagesService {
+export class MessageService {
   constructor(@InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
 
   createOne({ content }: CreateMessageI, groupUserId: GroupUser['id']): Promise<Message> {

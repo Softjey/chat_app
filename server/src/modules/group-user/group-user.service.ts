@@ -3,8 +3,8 @@ import { Repository } from 'typeorm';
 import { GroupUser } from './entities/group-user.entity';
 import { Group } from '../groups/entities/group.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Message } from '../messages/entities/message.entity';
-import { User } from '../users/entities/user.entity';
+import { Message } from '../message/entities/message.entity';
+import { User } from '../user/entities/user.entity';
 import { PaginationArgsI, PaginationHelper } from 'src/utils/pagination.helper';
 
 @Injectable()

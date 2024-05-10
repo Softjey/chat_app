@@ -1,10 +1,10 @@
 import { Args, Mutation, Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { Message } from './entities/message.entity';
-import { MessagesService } from './messages.service';
+import { MessageService } from './message.service';
 import { GroupUserService } from '../group-user/group-user.service';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { ReqUser } from '../auth/decorators/req-user.decorator';
-import { User } from '../users/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { BadRequestException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/gurads/auth.guard';
 
@@ -12,7 +12,7 @@ import { AuthGuard } from '../auth/gurads/auth.guard';
 @Resolver(() => Message)
 export class MessageResolver {
   constructor(
-    private readonly messagesService: MessagesService,
+    private readonly messagesService: MessageService,
     private readonly groupUserService: GroupUserService,
   ) {}
 

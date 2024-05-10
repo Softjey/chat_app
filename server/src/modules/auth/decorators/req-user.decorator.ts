@@ -1,6 +1,6 @@
 import { createParamDecorator } from '@nestjs/common';
 import type { Request } from 'express';
-import { User } from 'src/modules/users/entities/user.entity';
+import { User } from 'src/modules/user/entities/user.entity';
 import { ExecutionContext } from 'src/types/execution-context.types';
 import { ContextHelper } from 'src/utils/context.helper';
 

@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { Repository } from 'typeorm';
-import { User } from '../users/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { GroupUser, UserGroupRole } from '../group-user/entities/group-user.entity';
 import { CreateGroupDto } from './dtos/create-group.dto';
 
 @Injectable()
-export class GroupsService {
+export class GroupService {
   constructor(@InjectRepository(Group) private readonly groupRepository: Repository<Group>) {}
 
   async createOneWithInitialOwner(

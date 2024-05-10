@@ -2,17 +2,17 @@ import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GroupUser } from './entities/group-user.entity';
 import { GroupUserResolver } from './group-user.resolver';
-import { UsersModule } from 'src/modules/users/users.module';
+import { UserModule } from 'src/modules/user/user.module';
 import { GroupUserService } from './group-user.service';
-import { GroupsModule } from '../groups/groups.module';
-import { MessagesModule } from '../messages/messages.module';
+import { GroupModule } from '../groups/group.module';
+import { MessageModule } from '../message/message.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([GroupUser]),
-    forwardRef(() => UsersModule),
-    forwardRef(() => GroupsModule),
-    forwardRef(() => MessagesModule),
+    forwardRef(() => UserModule),
+    forwardRef(() => GroupModule),
+    forwardRef(() => MessageModule),
   ],
   providers: [GroupUserResolver, GroupUserService],
   exports: [GroupUserService],

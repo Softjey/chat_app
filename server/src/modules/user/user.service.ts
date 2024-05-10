@@ -6,7 +6,7 @@ import { CreateUserI } from './interfaces/create-user.interface';
 import { GroupUser } from 'src/modules/group-user/entities/group-user.entity';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,

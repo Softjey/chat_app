@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import * as jwt from 'jsonwebtoken';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { UserService } from '../user/user.service';
 import { plainToInstance } from 'class-transformer';
 import { ValidationError, validateOrReject } from 'class-validator';
 import { SessionDTO } from './dtos/session-dto';
@@ -11,7 +11,7 @@ import { ConfigService } from '../config/config.service';
 export class AuthService {
   constructor(
     private readonly configService: ConfigService,
-    private readonly usersService: UsersService,
+    private readonly usersService: UserService,
   ) {}
 
   private async getUserFromAccessToken(accessToken: string): Promise<SessionDTO> {

@@ -1,11 +1,11 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GroupUser } from './entities/group-user.entity';
-import { UsersService } from 'src/modules/users/users.service';
-import { User } from '../users/entities/user.entity';
-import { GroupsService } from '../groups/groups.service';
+import { UserService } from 'src/modules/user/user.service';
+import { User } from '../user/entities/user.entity';
+import { GroupService } from '../groups/group.service';
 import { Group } from '../groups/entities/group.entity';
-import { MessagesService } from '../messages/messages.service';
-import { Message } from '../messages/entities/message.entity';
+import { MessageService } from '../message/message.service';
+import { Message } from '../message/entities/message.entity';
 import { GroupUserService } from './group-user.service';
 import { ReqUser } from '../auth/decorators/req-user.decorator';
 import { UseGuards } from '@nestjs/common';
@@ -16,9 +16,9 @@ import { MessagesPaginationArgs, MyGroupsPaginationArgs } from 'src/utils/pagina
 @Resolver(() => GroupUser)
 export class GroupUserResolver {
   constructor(
-    private readonly usersService: UsersService,
-    private readonly groupsService: GroupsService,
-    private readonly messagesService: MessagesService,
+    private readonly usersService: UserService,
+    private readonly groupsService: GroupService,
+    private readonly messagesService: MessageService,
     private readonly groupUserService: GroupUserService,
   ) {}
 
