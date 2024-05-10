@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './modules/database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { GroupModule } from './modules/groups/group.module';
+import { GroupModule } from './modules/group/group.module';
 import { GraphQLModule } from './modules/graphql/graphql.module';
 import { AuthModule } from './modules/auth/auth.module';
 

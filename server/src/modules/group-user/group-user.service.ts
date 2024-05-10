@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { GroupUser } from './entities/group-user.entity';
-import { Group } from '../groups/entities/group.entity';
+import { Group } from '../group/entities/group.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Message } from '../message/entities/message.entity';
 import { User } from '../user/entities/user.entity';
