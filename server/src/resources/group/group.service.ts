@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { GroupUser, UserGroupRole } from '../group-user/entities/group-user.entity';
 import { CreateGroupDto } from './dtos/create-group.dto';
+import { Message } from '../message/entities/message.entity';
 
 @Injectable()
 export class GroupService {
@@ -34,6 +35,12 @@ export class GroupService {
   async getByGroupUserId(groupUserId: GroupUser['id']): Promise<Group | null> {
     return this.groupRepository.findOne({
       where: { groupUsers: { id: groupUserId } },
+    });
+  }
+
+  async getOneByMessageId(messageId: Message['id']): Promise<Group | null> {
+    return this.groupRepository.findOne({
+      where: { messages: { id: messageId } },
     });
   }
 }

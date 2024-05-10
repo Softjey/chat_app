@@ -5,14 +5,12 @@ import { GroupUserResolver } from './group-user.resolver';
 import { UserModule } from 'src/resources/user/user.module';
 import { GroupUserService } from './group-user.service';
 import { GroupModule } from '../group/group.module';
-import { MessageModule } from '../message/message.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([GroupUser]),
     forwardRef(() => UserModule),
     forwardRef(() => GroupModule),
-    forwardRef(() => MessageModule),
   ],
   providers: [GroupUserResolver, GroupUserService],
   exports: [GroupUserService],

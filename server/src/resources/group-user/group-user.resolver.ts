@@ -4,7 +4,6 @@ import { UserService } from 'src/resources/user/user.service';
 import { User } from '../user/entities/user.entity';
 import { GroupService } from '../group/group.service';
 import { Group } from '../group/entities/group.entity';
-import { MessageService } from '../message/message.service';
 import { GroupUserService } from './group-user.service';
 import { ReqUser } from '../../modules/auth/decorators/req-user.decorator';
 import { UseGuards } from '@nestjs/common';
@@ -17,7 +16,6 @@ export class GroupUserResolver {
   constructor(
     private readonly usersService: UserService,
     private readonly groupsService: GroupService,
-    private readonly messagesService: MessageService,
     private readonly groupUserService: GroupUserService,
   ) {}
 

@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserI } from './interfaces/create-user.interface';
 import { GroupUser } from 'src/resources/group-user/entities/group-user.entity';
+import { Message } from '../message/entities/message.entity';
 
 @Injectable()
 export class UserService {
@@ -29,6 +30,12 @@ export class UserService {
   async getOneByGroupUserId(groupUserId: GroupUser['id']): Promise<User | null> {
     return this.usersRepository.findOne({
       where: { userGroups: { id: groupUserId } },
+    });
+  }
+
+  async getOneByMessageId(messageId: Message['id']): Promise<User | null> {
+    return this.usersRepository.findOne({
+      where: { messages: { id: messageId } },
     });
   }
 

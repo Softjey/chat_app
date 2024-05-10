@@ -4,11 +4,13 @@ import { GroupService } from './group.service';
 import { CreateGroupDto } from './dtos/create-group.dto';
 import { GroupUser } from '../group-user/entities/group-user.entity';
 import { GroupUserService } from '../group-user/group-user.service';
-import { GroupUsersPaginationArgs } from 'src/utils/pagination.helper';
+import { GroupUsersPaginationArgs, MessagesPaginationArgs } from 'src/utils/pagination.helper';
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { ReqUser } from '../../modules/auth/decorators/req-user.decorator';
 import { AuthGuard } from '../../modules/auth/gurads/auth.guard';
 import { User } from '../user/entities/user.entity';
+import { MessageService } from '../message/message.service';
+import { Message } from '../message/entities/message.entity';
 
 @UseGuards(AuthGuard)
 @Resolver(() => Group)
@@ -16,12 +18,8 @@ export class GroupResolver {
   constructor(
     private readonly groupUserService: GroupUserService,
     private readonly groupsService: GroupService,
+    private readonly messageService: MessageService,
   ) {}
-
-  @Query(() => String)
-  hello(): string {
-    return 'Hello World!';
-  }
 
   @Query(() => Group)
   async group(@Args('id', { type: () => ID }) id: Group['id']): Promise<Group> {
@@ -48,5 +46,13 @@ export class GroupResolver {
     @Args() paginationOptions: GroupUsersPaginationArgs,
   ): Promise<GroupUser[]> {
     return this.groupUserService.getByGroupId(group.id, paginationOptions);
+  }
+
+  @ResolveField()
+  async messages(
+    @Parent() group: Group,
+    @Args() paginationOptions: MessagesPaginationArgs,
+  ): Promise<Message[]> {
+    return this.messageService.getByGroupId(group.id, paginationOptions);
   }
 }
