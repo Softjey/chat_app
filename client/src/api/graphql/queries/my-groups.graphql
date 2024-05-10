@@ -1,0 +1,14 @@
+query GetMyGroups {
+  myGroups: getMyGroups {
+    group {
+      id
+      name
+      photo
+      createdAt
+    }
+    messages(offset: 0, limit: 1) {
+      content
+      createdAt
+    }
+  }
+}
