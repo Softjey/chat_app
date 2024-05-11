@@ -5,10 +5,14 @@ query GetMyGroups {
       name
       photo
       createdAt
-    }
-    messages(offset: 0, limit: 1) {
-      content
-      createdAt
+      messages(offset: 0, limit: 1) {
+        content
+        createdAt
+        user {
+          name
+          photo
+        }
+      }
     }
   }
 }

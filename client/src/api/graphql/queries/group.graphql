@@ -1,0 +1,19 @@
+query group($groupId: ID!) {
+  group(id: $groupId) {
+    id
+    name
+    description
+    photo
+    privacyType
+    createdAt
+    messages(offset: 0, limit: 100) {
+      id
+      content
+      createdAt
+      user {
+        name
+        photo
+      }
+    }
+  }
+}

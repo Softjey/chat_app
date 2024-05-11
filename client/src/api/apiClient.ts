@@ -2,7 +2,7 @@ import { AxiosInstance } from "axios";
 import { ApolloClient, DocumentNode, NormalizedCacheObject, gql } from "@apollo/client";
 import { createAxiosClient } from "./rest/axiosClient";
 import { createApolloClient } from "./graphql/apolloClient";
-import { GetHelloDocument, GetMyGroupsDocument } from "./graphql/generated/graphql";
+import { GetMyGroupsDocument, GroupDocument } from "./graphql/generated/graphql";
 
 const API_BASE_URL = "http://localhost:4000";
 
@@ -10,8 +10,8 @@ export class ApiClient {
   readonly axiosClient: AxiosInstance;
   readonly apolloClient: ApolloClient<NormalizedCacheObject>;
   readonly queries = {
-    HELLO: GetHelloDocument,
     MY_GROUPS: GetMyGroupsDocument,
+    GROUP: GroupDocument,
   };
 
   constructor(baseURL: string) {
