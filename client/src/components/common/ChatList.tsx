@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import apiClient from "@/api/apiClient";
 
 function ChatList({ className }: Pick<ListboxProps, "className">) {
-  const { loading, data, error } = useQuery(apiClient.queries.MY_GROUPS);
+  const { loading, data } = useQuery(apiClient.queries.MY_GROUPS);
 
   if (loading || !data) {
     return <div>Loading...</div>;
@@ -23,7 +23,7 @@ function ChatList({ className }: Pick<ListboxProps, "className">) {
     >
       {(myGroup) => (
         <ListboxItem key={myGroup.group.id} textValue={myGroup.group.name}>
-          <ChatItem chat={myGroup} />
+          <ChatItem chat={myGroup.group} />
         </ListboxItem>
       )}
     </Listbox>
